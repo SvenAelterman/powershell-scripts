@@ -1,4 +1,4 @@
-﻿<#PSScriptInfo
+<#PSScriptInfo
 
 .VERSION 1.0
 
@@ -8,11 +8,11 @@
 
 .COPYRIGHT 
 
-.TAGS 
+.TAGS SSMS2016 SSMS SQLServer
 
 .LICENSEURI 
 
-.PROJECTURI 
+.PROJECTURI https://github.com/SvenAelterman/powershell-scripts
 
 .ICONURI 
 
@@ -23,21 +23,22 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 
 .RELEASENOTES
+
+.GUID 3e5a33cc-e743-4d67-9f03-80cd952bc3ce
 #>
 
 <# 
 
 .DESCRIPTION 
- my test script file description goes here 
+Comments out the lines relating to NOT loading TFS SCC packags for SSMS 2016
+By commenting out those lines the VS 2015 shell WILL load those packages and
+TFS integration will be enabled.
 
-#> # Comments out the lines relating to NOT loading TFS SCC packags for SSMS 2016
-# By commenting out those lines the VS 2015 shell WILL load those packages and
-# TFS integration will be enabled
+This script may need to be run with Admin privileges - usually normal users
+do not have write permission to files in the Program Files folders.
 
-# This script may need to be run with Admin privileges - usually normal users
-# do not have write permission to files in the Program Files folders
-
-# This assumes a x64 machine
+This assumes a x64 machine.
+#>
 $SsmsUndefPath = 'C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\ManagementStudio\ssms.pkgundef';
 $TfsConfig = '// TFS SCC Configuration'
 
@@ -78,13 +79,15 @@ if (Test-Path $SsmsUndefPath)
                 }
             } 
 
+            # Update the pkgundef file
             Set-Content -Value $content -Path $SsmsUndefPath
 
-            break # Exit the outer for loop
+            # Exit the outer for loop
+            break 
         }
     }
 }
 else
 {
-    Write-Host "Could not find package definition file at $SsmsUndefPath - Is SSMS 2016 Installed?"
+    Write-Host "Could not find package definition file at $SsmsUndefPath - Is SSMS 2016 Installed? Is this an x64 Operating System?"
 }
