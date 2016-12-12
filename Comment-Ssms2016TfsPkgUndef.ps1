@@ -25,17 +25,11 @@
 .RELEASENOTES
 
 .GUID 3e5a33cc-e743-4d67-9f03-80cd952bc3ce
-#>
-
-<# 
 
 .DESCRIPTION 
-Comments out the lines relating to NOT loading TFS SCC packags for SSMS 2016
-By commenting out those lines the VS 2015 shell WILL load those packages and
-TFS integration will be enabled.
+Comments out the lines relating to NOT loading TFS SCC packags for SSMS 2016. By commenting out those lines the VS 2015 shell WILL load those packages and TFS integration will be enabled.
 
-This script may need to be run with Admin privileges - usually normal users
-do not have write permission to files in the Program Files folders.
+This script may need to be run with Admin privileges - usually normal users do not have write permission to files in the Program Files folders.
 
 This assumes a x64 machine.
 #>
